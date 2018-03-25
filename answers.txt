@@ -1,0 +1,4 @@
+1. Klasy abstrakcyjne to klasy zawierające metody abstrakcyjne, nie można stworzyć obiektu klasy abstrakcyjnej, służą do tworzenia innych klas podobnych do siebie przez dziedziczenie po niej.
+2. Interfejs to zbiór metod i stałych dostępnych dla klas implementujących dane interfejs. Służą jako szablon dla klas. Implementacja zmusza interfejsu zmusza do implementacji wszystkich metod interfejsu w klasie.
+3.  Singleton wzorzec projektowy służący do tworzenia obiektu klasy i ograniczenia go do jednej instancji, poprzez prywatny konstruktor sprwdzajacy czy instancja istnieje.
+Fasada 
