@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-
 @Controller
 @SessionAttributes({ "param1", "param2" })
 public class Exam5Controller {
 	@Autowired
 	private AnimalDao animalDao;
+
 	@RequestMapping("/")
 	public String homeView() {
 		return "home";
@@ -42,12 +42,13 @@ public class Exam5Controller {
 	// składa się tylko z małych liter
 	// ma rozszerzenie (gif, jpg, png)
 	// ma kropkę przed rozszerzeniem np.: cat.jpg
-	@RequestMapping("regex/{param1}")
-	public String regexView(@PathVariable String param1) {
+	@RequestMapping("regex/{param1:.+}")
+	public String regexView(@PathVariable String param1, HttpServletRequest request) {
 		Pattern compiledPattern = Pattern.compile("^[a-z]+.(gif|jpg|png)$");
 		Matcher matcher = compiledPattern.matcher(param1);
-		if (!matcher.matches()) {
-			param1 = "cat.jpg";
+		System.out.println(param1);
+		if (matcher.matches()) {
+			request.setAttribute(param1, "cat.jpg");
 			return "redirect:http://google.pl";
 		} else {
 			return "regex";
@@ -73,14 +74,14 @@ public class Exam5Controller {
 		response.addCookie(cookie);
 
 	}
-	
+
 	@RequestMapping("animals")
 	public ModelAndView animals() {
-		 animalDao=new AnimalDao();
+		animalDao = new AnimalDao();
 		ModelAndView mav = new ModelAndView("animal");
 		mav.addObject("animalList", animalDao.getList());
-		
+
 		return mav;
 	}
-	
+
 }
